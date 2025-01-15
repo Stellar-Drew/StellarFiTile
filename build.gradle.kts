@@ -1,3 +1,5 @@
+import org.gradle.api.publish.maven.MavenPublication
+
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
@@ -35,13 +37,6 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3" // Updated to 1.5.3
-    }
-
-    publishing{
-        singleVariant("release"){
-            withSourcesJar()
-            withJavadocJar()
-        }
     }
     buildFeatures {
         compose = true
