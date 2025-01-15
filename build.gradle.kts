@@ -8,6 +8,16 @@ plugins {
     `maven-publish`
 }
 
+buildscript {
+    repositories {
+        google() // Add Google's Maven repository
+        mavenCentral()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:8.0.0") // Or your desired AGP version
+    }
+}
+
 android {
     namespace = "com.stellarfi.widget"
     compileSdk = 35
