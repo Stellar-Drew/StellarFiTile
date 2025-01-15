@@ -15,7 +15,7 @@ import com.stellarfi.widget.R
  */
 
 class StellarfiScoreTile : Fragment() {
-    private val token = "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJzdGVsbGFyZmkiLCJzdWIiOiJhY2NfY3VzdF8wbXRha2F6NXVxZm4iLCJqdGkiOiI3NTVjNTI5Mi0xMDM2LTQxOTktYWU5ZC1jZjc1ODMyYThhMDQiLCJpYXQiOjE3MzY4NzExNjIsImF1ZCI6ImFjY19lM25uajI5cHN2b3MiLCJyb2xlIjoiYWNjb3VudF9jdXN0b21lciIsImV4cCI6MTczNjg3MjA2Mn0.lOp9H9vvZyFFSTo8HQC1OR9YJyL2Xmv2sMqU4NYfSgc";
+    private val token = "";
     private lateinit var url: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
