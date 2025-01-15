@@ -56,6 +56,9 @@ afterEvaluate {
     }
 }
 
+tasks.register<Wrapper>("wrapper") {
+    gradleVersion = "7.6.1"
+}
 
 dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2024.12.01")
