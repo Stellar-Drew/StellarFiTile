@@ -11,7 +11,7 @@ plugins {
 android {
     namespace = "com.stellarfi.widget"
     compileSdk = 35
-
+    buildToolsVersion = "35.0.0"
     defaultConfig {
         minSdk = 24
 
