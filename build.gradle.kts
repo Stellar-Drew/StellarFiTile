@@ -50,7 +50,6 @@ publishing {
         }
     }
     repositories {
-        mavenLocal()
     }
 }
 
