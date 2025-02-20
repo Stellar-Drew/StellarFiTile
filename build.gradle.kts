@@ -1,15 +1,14 @@
 import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
-    id("com.android.library")
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("maven-publish")
-    kotlin("plugin.serialization") version "1.8.21"
+    `maven-publish`
 }
 
 android {
     namespace = "com.stellarfi.widget"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
@@ -35,37 +34,31 @@ android {
         jvmTarget = "17"
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.3" // Updated to 1.5.3
+        kotlinCompilerExtensionVersion = "1.5.11"
     }
     buildFeatures {
         compose = true
     }
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("release") {
-                from(components["release"])
-                groupId = "com.stellarfi"
-                artifactId = "StellarfiScoreTile"
-                version = "1.0.0"
-            }
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            groupId = "com.github.Stellar-Drew" // Changed to be JitPack compliant
+            artifactId = "StellarfiScoreTile"
+            version = "1.0.0" // You can change this to a commit hash later
         }
+    }
+    repositories {
+        mavenLocal()
     }
 }
 
-tasks.register<Wrapper>("wrapper") {
-    gradleVersion = "8.2."
-}
 
 dependencies {
     implementation(libs.androidx.fragment)
     val composeBom = platform("androidx.compose:compose-bom:2024.12.01")
     implementation(composeBom)
-    implementation( "com.android.tools.build:gradle:4.0.0")
-    implementation("com.github.dcendents:android-maven-gradle-plugin:2.1")
-    implementation("com.google.guava:guava:29.0-jre")
     androidTestImplementation(composeBom)
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -74,8 +67,6 @@ dependencies {
     implementation("androidx.compose.material:material-icons-core")
 
     implementation("androidx.compose.material:material-icons-extended")
-
-    implementation ("com.github.jitpack:gradle-simple:1.1")
 
     implementation("androidx.compose.material3.adaptive:adaptive:1.0.0")
 
