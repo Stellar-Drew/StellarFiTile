@@ -64,6 +64,9 @@ dependencies {
     implementation(libs.androidx.fragment)
     val composeBom = platform("androidx.compose:compose-bom:2024.12.01")
     implementation(composeBom)
+    implementation( "com.android.tools.build:gradle:4.0.0")
+    implementation("com.github.dcendents:android-maven-gradle-plugin:2.1")
+    implementation("com.google.guava:guava:29.0-jre")
     androidTestImplementation(composeBom)
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation("androidx.compose.ui:ui-tooling-preview")
@@ -72,6 +75,8 @@ dependencies {
     implementation("androidx.compose.material:material-icons-core")
 
     implementation("androidx.compose.material:material-icons-extended")
+
+    implementation ("com.github.jitpack:gradle-simple:1.1")
 
     implementation("androidx.compose.material3.adaptive:adaptive:1.0.0")
 
