@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("maven-publish")
     kotlin("plugin.serialization") version "1.8.21"
-    `maven-publish`
 }
 
 android {
@@ -29,11 +28,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.5.3" // Updated to 1.5.3
@@ -48,16 +47,16 @@ afterEvaluate {
         publications {
             create<MavenPublication>("release") {
                 from(components["release"])
-                groupId = "com.stellarfi" // Replace with your group ID
-                artifactId = "StellarfiScoreTile" // Replace with your artifact ID
-                version = "1.0.0" // Replace with your version
+                groupId = "com.stellarfi"
+                artifactId = "StellarfiScoreTile"
+                version = "1.0.0"
             }
         }
     }
 }
 
 tasks.register<Wrapper>("wrapper") {
-    gradleVersion = "7.6.1"
+    gradleVersion = "8.2."
 }
 
 dependencies {
