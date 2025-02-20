@@ -3,7 +3,7 @@ import org.gradle.api.publish.maven.MavenPublication
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("org.gradle.maven-publish")
+    id("org.gradle.maven-publish") 
 }
 
 android {
