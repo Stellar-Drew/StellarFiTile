@@ -1,9 +1,9 @@
 import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
+    id("org.gradle.maven-publish")
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("org.gradle.maven-publish") 
 }
 
 android {
@@ -40,7 +40,6 @@ android {
         compose = true
     }
 }
-
 publishing {
     publications {
         create<MavenPublication>("release") {
@@ -50,6 +49,7 @@ publishing {
         }
     }
     repositories {
+        mavenLocal()
     }
 }
 
