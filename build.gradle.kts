@@ -38,6 +38,20 @@ android {
         compose = true
     }
 }
+afterEvaluate{
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                groupId = "com.github.Stellar-Drew" // Changed to be JitPack compliant
+                artifactId = "StellarfiScoreTile"
+                version = "1.0.0" // You can change this to a commit hash later
+            }
+        }
+        repositories {
+            mavenLocal()
+        }
+    }
+}
 
 
 dependencies {
