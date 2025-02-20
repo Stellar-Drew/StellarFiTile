@@ -1,5 +1,3 @@
-import org.gradle.api.publish.maven.MavenPublication
-
 plugins {
     id("org.gradle.maven-publish")
     alias(libs.plugins.android.library)
@@ -38,18 +36,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-}
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            groupId = "com.github.Stellar-Drew" // Changed to be JitPack compliant
-            artifactId = "StellarfiScoreTile"
-            version = "1.0.0" // You can change this to a commit hash later
-        }
-    }
-    repositories {
-        mavenLocal()
     }
 }
 
