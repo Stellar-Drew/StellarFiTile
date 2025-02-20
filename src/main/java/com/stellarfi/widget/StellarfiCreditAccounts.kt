@@ -16,7 +16,7 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 
-class StellarfiScoreTile() : Fragment() {
+class StellarfiCreditAccounts() : Fragment() {
     private var token: String? = null
 
     override fun onCreateView(
@@ -101,11 +101,11 @@ class StellarfiScoreTile() : Fragment() {
                    <script>
                    window.process = { env: {} }; // Basic polyfill for process.env
                </script>
-               <script type="module" src="https://components-stg.stellarfi.com/staging/latest/credit-score/index.esm.js"></script>
+               <script type="module" src="https://components-stg.stellarfi.com/staging/latest/credit-accounts/index.esm.js"></script>
                 <title>Hello World</title>
                 <script>
                     function myCustomFunction() {
-                        Android.showToast("This is an alert passwed from score webview");
+                        Android.showToast("This is a web alert");
                         Android.onData("Execute data passed to native");
                     }
                     myCustomFunction();
@@ -113,7 +113,7 @@ class StellarfiScoreTile() : Fragment() {
             </head>
             <body>
             <div id="wrapper">
-                <credit-score token ="$token"></credit-score>
+                <credit-accounts token ="$token"></credit-accounts>
             </div>
             </body>
             <style> 
@@ -125,8 +125,8 @@ class StellarfiScoreTile() : Fragment() {
     }
 
     companion object {
-        fun newInstance(token: String): StellarfiScoreTile {
-            val fragment = StellarfiScoreTile()
+        fun newInstance(token: String): StellarfiCreditAccounts {
+            val fragment = StellarfiCreditAccounts()
             val args = Bundle()
             args.putString("TOKEN", token)
             fragment.arguments = args

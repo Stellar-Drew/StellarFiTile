@@ -8,20 +8,10 @@ plugins {
     `maven-publish`
 }
 
-buildscript {
-    repositories {
-        google() // Add Google's Maven repository
-        mavenCentral()
-    }
-    dependencies {
-        classpath("com.android.tools.build:gradle:8.0.0") // Or your desired AGP version
-    }
-}
-
 android {
     namespace = "com.stellarfi.widget"
     compileSdk = 35
-    buildToolsVersion = "35.0.0"
+
     defaultConfig {
         minSdk = 24
 
@@ -71,10 +61,10 @@ tasks.register<Wrapper>("wrapper") {
 }
 
 dependencies {
+    implementation(libs.androidx.fragment)
     val composeBom = platform("androidx.compose:compose-bom:2024.12.01")
     implementation(composeBom)
     androidTestImplementation(composeBom)
-    implementation("com.android.tools.build:gradle:8.0.0")
     implementation("androidx.compose.material3:material3:1.3.1")
     implementation("androidx.compose.ui:ui-tooling-preview")
     debugImplementation("androidx.compose.ui:ui-tooling")

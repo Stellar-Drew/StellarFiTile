@@ -11,19 +11,33 @@ import android.webkit.JavascriptInterface
 import android.webkit.WebChromeClient
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
+import androidx.compose.material3.AlertDialog
+import androidx.compose.ui.semantics.dismiss
 import androidx.fragment.app.Fragment
-import java.io.BufferedReader
+import android.app.AlertDialog.Builder
+import androidx.fragment.app.FragmentActivity
 import java.io.IOException
 import java.io.InputStreamReader
 
-class StellarfiScoreTile() : Fragment() {
+class StellarfiCreditScoreHistory() : Fragment() {
     private var token: String? = null
+    private lateinit var activityContext: FragmentActivity
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return inflater.inflate(layoutId(), container, false)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is FragmentActivity) {
+            activityContext = context
+        } else {
+            throw IllegalStateException("Context must be a FragmentActivity")
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,14 +70,14 @@ class StellarfiScoreTile() : Fragment() {
         webView.isHorizontalScrollBarEnabled = false
 
         // Add the JavaScript interface
-        webView.addJavascriptInterface(WebAppInterface(requireContext()), "Android")
+        webView.addJavascriptInterface(WebAppInterface(activityContext), "Android")
 
         // Check if token is available before proceeding
         if (token != null) {
             val htmlContent = generateHtmlContent(token!!)
             webView.loadData(htmlContent, "text/html", "UTF-8")
         } else {
-            Log.e("StellarfiCreditAccounts", "Token is null. Cannot load WebView content.")
+            Log.e("StellarfiCreditScoreHistory", "Token is null. Cannot load WebView content.")
             // Handle the error appropriately, e.g., show an error message to the user
         }
     }
@@ -73,12 +87,24 @@ class StellarfiScoreTile() : Fragment() {
     }
 
     // WebAppInterface class
-    class WebAppInterface(private val mContext: Context) {
-        /** Show a toast from the web page */
+    class WebAppInterface(private val activityContext: FragmentActivity) {
+        /** Show an alert dialog from the web page */
         @JavascriptInterface
-        fun showToast(toast: String) {
-            Log.d("WebAppInterface", "showToast: $toast")
+        fun showAlert(message: String) {
+            // Use runOnUiThread to show the AlertDialog on the main thread
+            activityContext.runOnUiThread {
+                Builder(activityContext) // Use Builder here
+                    .setTitle("Alert from Web")
+                    .setMessage(message)
+                    .setPositiveButton("OK") { dialog, _ ->
+                        dialog.dismiss()
+                    }
+                    .create()
+                    .show()
+            }
+            Log.d("WebAppInterface", "showAlert: $message")
         }
+
         @JavascriptInterface
         fun onData(value: String) {
             Log.d("WebAppInterface", "onData: $value")
@@ -101,11 +127,11 @@ class StellarfiScoreTile() : Fragment() {
                    <script>
                    window.process = { env: {} }; // Basic polyfill for process.env
                </script>
-               <script type="module" src="https://components-stg.stellarfi.com/staging/latest/credit-score/index.esm.js"></script>
+               <script type="module" src="https://components-stg.stellarfi.com/staging/latest/credit-score-history/index.esm.js"></script>
                 <title>Hello World</title>
                 <script>
                     function myCustomFunction() {
-                        Android.showToast("This is an alert passwed from score webview");
+                        Android.showAlert("wahtever");
                         Android.onData("Execute data passed to native");
                     }
                     myCustomFunction();
@@ -113,20 +139,19 @@ class StellarfiScoreTile() : Fragment() {
             </head>
             <body>
             <div id="wrapper">
-                <credit-score token ="$token"></credit-score>
+                <credit-score-history token ="$token"></credit-score-history>
             </div>
             </body>
             <style> 
               #wrapper{ width: 1450px; height: 1450px; margin: 0px auto;}
             </style>
-            
             </html>
         """.trimIndent()
     }
 
     companion object {
-        fun newInstance(token: String): StellarfiScoreTile {
-            val fragment = StellarfiScoreTile()
+        fun newInstance(token: String): StellarfiCreditScoreHistory {
+            val fragment = StellarfiCreditScoreHistory()
             val args = Bundle()
             args.putString("TOKEN", token)
             fragment.arguments = args
