@@ -1,7 +1,7 @@
 import org.gradle.api.publish.maven.MavenPublication
 
 plugins {
-    alias(libs.plugins.android.library)
+    id("com.android.library")
     alias(libs.plugins.kotlin.android)
     id("maven-publish")
     kotlin("plugin.serialization") version "1.8.21"
