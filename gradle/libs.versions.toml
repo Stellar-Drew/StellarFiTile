@@ -13,6 +13,7 @@ androidx-espresso-core = "3.5.1"
 android-library = { id = "com.android.library", version.ref = "androidLib"}
 android-application = { id = "com.android.application", version.ref = "androidLib" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+maven-publish = { id = "maven-publish" }
 
 [libraries]
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
