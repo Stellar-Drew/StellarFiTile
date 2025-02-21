@@ -2,7 +2,7 @@ install:
   - ./gradlew assembleRelease
   - ./gradlew publishToMavenLocal
   - echo "Running a custom install command"
-  - ./gradlew clean install 
+  - ./gradlew --no-daemon assemble
 
 jdk:
   - openjdk17
