@@ -1,13 +1,7 @@
-install:
-  - ./gradlew assembleRelease
-  - ./gradlew publishToMavenLocal
-  - echo "Running a custom install command"
-  - ./gradlew clean install -xtest
-
 jdk:
   - openjdk17
-
 before_install:
-  - sdk install java 17.0.12-oracle
-  - sdk use java 17.0.12-oracle
+  - ./scripts/prepareJitpackEnvironment.sh
+install:
+  - FILE="-Dfile=stellarWidgets.aar"
   - ./custom_setup.sh
